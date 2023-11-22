@@ -2,9 +2,9 @@ package com.example.domy.task;
 
 import com.example.domy.tasklist.TaskList;
 import com.example.domy.user.User;
-import jakarta.persistence.*;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "list_id")
-    private TaskList list;
+    private TaskList taskList;
 
     @ManyToMany
     @JoinTable(

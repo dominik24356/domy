@@ -1,10 +1,10 @@
 package com.example.domy.tasklist;
 
+import com.example.domy.board.Board;
 import com.example.domy.task.Task;
-import com.example.domy.user.User;
-import jakarta.persistence.*;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -17,8 +17,8 @@ public class TaskList {
     private String listName;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "board_id")
+    private Board board;
 
     @OneToMany(mappedBy = "taskList", cascade = CascadeType.ALL)
     private List<Task> tasks;
