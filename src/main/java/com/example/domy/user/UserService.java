@@ -1,5 +1,6 @@
 package com.example.domy.user;
 
+import com.example.domy.user.dto.UserDto;
 import com.example.domy.user.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -7,12 +8,14 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     UserRepository userRepository;
+    UserMapper userMapper;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
-    public User getUserById(Long id) {
-        return userRepository.getByUserId(id).orElseThrow(() -> new UserNotFoundException(id));
+    public UserDto getUserById(Long id) {
+        return  userMapper.mapToUserDto(userRepository.getByUserId(id).orElseThrow(() -> new UserNotFoundException(id)));
     }
 }
