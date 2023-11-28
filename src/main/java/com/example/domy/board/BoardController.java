@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 @Controller
 public class BoardController {
 
@@ -17,8 +19,15 @@ public class BoardController {
     }
 
 
-    @GetMapping("/boards/{id}")
-    public ResponseEntity<BoardDto> getBoardById(@PathVariable Long id) {
-        return ResponseEntity.ok(boardService.getBoardById(id));
+    @GetMapping("/boards/{boardId}")
+    public ResponseEntity<BoardDto> getBoardById(@PathVariable Long boardId) {
+        return ResponseEntity.ok(boardService.getBoardById(boardId));
     }
+
+    @GetMapping("/users/{userId}/boards")
+    public ResponseEntity<List<BoardDto>> getBoardsByUserId(@PathVariable Long userId) {
+        return ResponseEntity.ok(boardService.getBoardsByUserId(userId));
+    }
+
+
 }

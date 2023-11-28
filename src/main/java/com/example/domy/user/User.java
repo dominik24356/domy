@@ -1,7 +1,6 @@
 package com.example.domy.user;
 
 import com.example.domy.board.Board;
-import com.example.domy.tasklist.TaskList;
 import lombok.Data;
 
 import javax.persistence.*;

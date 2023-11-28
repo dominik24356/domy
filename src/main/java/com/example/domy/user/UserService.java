@@ -15,7 +15,7 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public UserDto getUserById(Long id) {
-        return  userMapper.mapToUserDto(userRepository.getByUserId(id).orElseThrow(() -> new UserNotFoundException(id)));
+    public UserDto getUserById(Long userId) {
+        return  userMapper.mapToUserDto(userRepository.getByUserId(userId).orElseThrow(() -> new UserNotFoundException(userId)));
     }
 }
