@@ -8,8 +8,6 @@ import java.sql.Date;
 @Getter
 @Setter
 public class TaskDto {
-
-
     private Long taskId;
 
     private String taskName;
