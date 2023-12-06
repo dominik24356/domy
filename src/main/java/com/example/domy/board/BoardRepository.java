@@ -1,5 +1,6 @@
 package com.example.domy.board;
 
+import com.example.domy.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +12,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     Optional<Board> getByBoardId(Long boardId);
 
-    List<Board> getBoardsByUser_UserId(Long userId);
+    List<Board> getBoardsByUser(User user);
 
 
 }

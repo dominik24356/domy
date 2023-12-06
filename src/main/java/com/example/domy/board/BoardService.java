@@ -2,6 +2,8 @@ package com.example.domy.board;
 
 import com.example.domy.board.dto.BoardDto;
 import com.example.domy.board.exception.BoardNotFoundException;
+import com.example.domy.user.User;
+import com.example.domy.user.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +14,12 @@ public class BoardService {
     private BoardRepository boardRepository;
     private BoardMapper boardMapper;
 
-    public BoardService(BoardRepository boardRepository, BoardMapper boardMapper) {
+    private UserService userService;
+
+    public BoardService(BoardRepository boardRepository, BoardMapper boardMapper, UserService userService) {
         this.boardRepository = boardRepository;
         this.boardMapper = boardMapper;
+        this.userService = userService;
     }
 
     public BoardDto getBoardById(Long boardId) {
@@ -22,6 +27,7 @@ public class BoardService {
     }
 
     public List<BoardDto> getBoardsByUserId(Long userId) {
-        return boardMapper.mapToListOfBoardDto(boardRepository.getBoardsByUser_UserId(userId)) ;
+        User user = userService.getUserById(userId);
+        return boardMapper.mapToListOfBoardDto(boardRepository.getBoardsByUser(user)) ;
     }
 }
