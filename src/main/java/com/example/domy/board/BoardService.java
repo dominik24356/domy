@@ -22,8 +22,12 @@ public class BoardService {
         this.userService = userService;
     }
 
-    public BoardDto getBoardById(Long boardId) {
-        return  boardMapper.mapToBoardDto(boardRepository.getByBoardId(boardId).orElseThrow(() -> new BoardNotFoundException(boardId)));
+    public BoardDto getBoardDtoById(Long boardId) {
+        return  boardMapper.mapToBoardDto(getBoardById(boardId));
+    }
+
+    public Board getBoardById(Long boardId) {
+        return boardRepository.getByBoardId(boardId).orElseThrow(() -> new BoardNotFoundException(boardId));
     }
 
     public List<BoardDto> getBoardsByUserId(Long userId) {

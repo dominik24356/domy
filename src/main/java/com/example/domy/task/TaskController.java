@@ -18,16 +18,15 @@ public class TaskController {
     }
 
 
-    @GetMapping("/tasks/{taskId}")
-    public ResponseEntity<TaskDto> getTaskById(@PathVariable Long taskId) {
+    @GetMapping("/tasks/{task-id}")
+    public ResponseEntity<TaskDto> getTaskById(@PathVariable(name = "task-id") Long taskId) {
         return ResponseEntity.ok(taskService.getTaskById(taskId));
     }
 
-    @GetMapping("/users/{userId}/tasks")
-    public ResponseEntity<List<TaskDto>> getTasksByUserId(@PathVariable Long userId) {
+    @GetMapping("/users/{user-id}/tasks")
+    public ResponseEntity<List<TaskDto>> getTasksByUserId(@PathVariable(name = "user-id") Long userId) {
         return ResponseEntity.ok(taskService.getTasksByUserId(userId));
     }
-
 
 
 }

@@ -19,13 +19,13 @@ public class BoardController {
     }
 
 
-    @GetMapping("/boards/{boardId}")
-    public ResponseEntity<BoardDto> getBoardById(@PathVariable Long boardId) {
-        return ResponseEntity.ok(boardService.getBoardById(boardId));
+    @GetMapping("/boards/{board-id}")
+    public ResponseEntity<BoardDto> getBoardById(@PathVariable(name = "board-id") Long boardId) {
+        return ResponseEntity.ok(boardService.getBoardDtoById(boardId));
     }
 
-    @GetMapping("/users/{userId}/boards")
-    public ResponseEntity<List<BoardDto>> getBoardsByUserId(@PathVariable Long userId) {
+    @GetMapping("/users/{user-id}/boards")
+    public ResponseEntity<List<BoardDto>> getBoardsByUserId(@PathVariable(name = "user-id") Long userId) {
         return ResponseEntity.ok(boardService.getBoardsByUserId(userId));
     }
 
