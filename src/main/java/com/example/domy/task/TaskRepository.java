@@ -1,5 +1,6 @@
 package com.example.domy.task;
 
+import com.example.domy.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,7 +17,8 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             "JOIN u.boards b " +
             "JOIN b.taskLists tl " +
             "JOIN tl.tasks task " +
-            "WHERE u.userId = :userId")
-    List<Task> findTasksByUserId(@Param("userId") Long userId);
+            "WHERE u = :user")
+    List<Task> findTasksByUser(@Param("user") User user);
+
 
 }

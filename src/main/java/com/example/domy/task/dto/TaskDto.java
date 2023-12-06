@@ -15,4 +15,6 @@ public class TaskDto {
     private Date dueDate;
     private String status;
 
+    // assigned users
+
 }
