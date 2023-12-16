@@ -10,6 +10,45 @@ VALUES (1, 'Example Board', 1);
 INSERT INTO task_list (list_id, list_name, board_id)
 VALUES (1, 'Example Task List', 1);
 
+INSERT INTO task_list (list_id, list_name, board_id)
+VALUES (2, 'Example Task List', 1);
+
+INSERT INTO task_list (list_id, list_name, board_id)
+VALUES (3, 'Example Task List', 1);
+
+INSERT INTO task_list (list_id, list_name, board_id)
+VALUES (4, 'Example Task List', 1);
+
+INSERT INTO task_list (list_id, list_name, board_id)
+VALUES (5, 'Example Task List', 1);
+
+INSERT INTO task_list (list_id, list_name, board_id)
+VALUES (6, 'Example Task List', 1);
+
+INSERT INTO task_list (list_id, list_name, board_id)
+VALUES (7, 'Example Task List', 1);
+
 -- inserting task to taskboard
 INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
 VALUES (1, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
+
+INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
+VALUES (2, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
+
+INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
+VALUES (3, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
+
+INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
+VALUES (4, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
+
+INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
+VALUES (5, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
+
+INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
+VALUES (6, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
+
+INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
+VALUES (7, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
+
+INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
+VALUES (8, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
