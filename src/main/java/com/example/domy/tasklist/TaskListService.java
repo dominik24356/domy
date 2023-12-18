@@ -2,13 +2,12 @@ package com.example.domy.tasklist;
 
 import com.example.domy.board.Board;
 import com.example.domy.board.BoardService;
+import com.example.domy.task.Task;
 import com.example.domy.tasklist.dto.TaskListDto;
-import com.example.domy.tasklist.exception.TaskListNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskListService {
@@ -32,5 +31,21 @@ public class TaskListService {
     @Transactional
     public void deleteTaskListById(Long taskListId) {
         taskListRepository.deleteById(taskListId);
+    }
+
+    public void createTaskList(String title, Long boardId) {
+
+        if(!title.isBlank()) {
+            Board board = boardService.getBoardById(boardId);
+
+            TaskList taskList = TaskList.builder()
+                    .listName(title)
+                    .board(board)
+                    .build();
+
+            taskListRepository.save(taskList);
+        }
+
+
     }
 }

@@ -17,6 +17,8 @@ public class Task {
     private Long taskId;
 
     private String taskName;
+
+    @Column(length = 1000)
     private String description;
     private Date dueDate;
     private String status;
