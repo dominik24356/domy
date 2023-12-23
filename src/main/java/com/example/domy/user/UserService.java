@@ -16,10 +16,10 @@ public class UserService {
     }
 
     public UserDto getUserDtoById(Long userId) {
-        return  userMapper.mapToUserDto(userRepository.getByUserId(userId).orElseThrow(() -> new UserNotFoundException(userId)));
+        return  userMapper.mapToUserDto(getUserById(userId));
     }
 
     public User getUserById(Long userId) {
-        return  userRepository.getByUserId(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        return  userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
     }
 }

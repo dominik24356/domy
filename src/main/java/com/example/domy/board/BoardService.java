@@ -27,7 +27,7 @@ public class BoardService {
     }
 
     public Board getBoardById(Long boardId) {
-        return boardRepository.getByBoardId(boardId).orElseThrow(() -> new BoardNotFoundException(boardId));
+        return boardRepository.findById(boardId).orElseThrow(() -> new BoardNotFoundException(boardId));
     }
 
     public List<BoardDto> getBoardsByUserId(Long userId) {

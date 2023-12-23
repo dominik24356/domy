@@ -30,4 +30,12 @@ public class TaskList {
     private List<Task> tasks;
 
 
+    public void addTask(String taskName) {
+        Task task = Task.builder()
+                .taskName(taskName)
+                .taskList(this)
+                .build();
+
+        tasks.add(task);
+    }
 }

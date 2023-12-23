@@ -8,9 +8,5 @@ import java.util.List;
 
 @Repository
 public interface TaskListRepository extends JpaRepository<TaskList, Long> {
-
-
-
-
     List<TaskList> getTaskListsByBoard(Board board);
 }

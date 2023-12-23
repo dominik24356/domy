@@ -2,6 +2,8 @@ package com.example.domy.task;
 
 import com.example.domy.tasklist.TaskList;
 import com.example.domy.user.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import java.util.List;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
 public class Task {
 
     @Id
@@ -33,4 +37,8 @@ public class Task {
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> assignedUsers;
+
+    public Task() {
+
+    }
 }

@@ -2,8 +2,8 @@ package com.example.domy.tasklist;
 
 import com.example.domy.board.Board;
 import com.example.domy.board.BoardService;
-import com.example.domy.task.Task;
 import com.example.domy.tasklist.dto.TaskListDto;
+import com.example.domy.tasklist.exception.TaskListNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,7 +14,6 @@ public class TaskListService {
 
     BoardService boardService;
     TaskListRepository taskListRepository;
-
     TaskListMapper taskListMapper;
 
     public TaskListService(BoardService boardService, TaskListRepository taskListRepository, TaskListMapper taskListMapper) {
@@ -30,7 +29,8 @@ public class TaskListService {
 
     @Transactional
     public void deleteTaskListById(Long taskListId) {
-        taskListRepository.deleteById(taskListId);
+        TaskList taskList = getTaskListById(taskListId);
+        taskListRepository.delete(taskList);
     }
 
     public void createTaskList(String title, Long boardId) {
@@ -45,7 +45,15 @@ public class TaskListService {
 
             taskListRepository.save(taskList);
         }
+    }
 
+    public TaskList getTaskListById(Long id) {
+        return taskListRepository.findById(id).orElseThrow(() -> new TaskListNotFoundException(id));
+    }
 
+    public void addTask(String taskName, Long listId) {
+        TaskList taskList = getTaskListById(listId);
+        taskList.addTask(taskName);
+        taskListRepository.save(taskList);
     }
 }

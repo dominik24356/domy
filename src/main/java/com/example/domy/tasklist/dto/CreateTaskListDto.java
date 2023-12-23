@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateTaskListDto {
-    String title;
-    Long id;
+    String listTitle;
+    Long boardId;
 }
