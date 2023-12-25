@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AddTaskDto {
+
     private String taskName;
-    private Long listId;
 }

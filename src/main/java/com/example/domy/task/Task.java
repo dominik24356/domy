@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 import java.util.List;
 
@@ -19,10 +20,8 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
-
+    @NotBlank
     private String taskName;
-
-    @Column(length = 1000)
     private String description;
     private Date dueDate;
     private String status;

@@ -32,9 +32,9 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getTasksByUserId(userId));
     }
 
-    @PostMapping("/tasks")
-    public ResponseEntity<Void> addTask(@RequestBody AddTaskDto addTaskDto) {
-        taskService.addTask(addTaskDto.getTaskName(), addTaskDto.getListId());
+    @PostMapping("/task-lists/{list-id}/tasks")
+    public ResponseEntity<Void> addTaskToList(@RequestBody AddTaskDto addTaskDto, @PathVariable(name = "list-id") Long listId) {
+        taskService.addTask(addTaskDto.getTaskName(), listId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }

@@ -7,5 +7,4 @@ import lombok.Setter;
 @Setter
 public class CreateTaskListDto {
     String listTitle;
-    Long boardId;
 }
