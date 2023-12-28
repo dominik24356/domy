@@ -17,6 +17,13 @@ import java.util.List;
 @AllArgsConstructor
 public class Task {
 
+    public enum TaskStatus {
+        TODO,
+        IN_PROGRESS,
+        COMPLETED,
+        ON_HOLD
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
@@ -24,7 +31,8 @@ public class Task {
     private String taskName;
     private String description;
     private Date dueDate;
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status;
 
     @ManyToOne
     @JoinColumn(name = "list_id")
@@ -36,6 +44,15 @@ public class Task {
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> assignedUsers;
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Attachment> attachments;
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Label> labels;
 
     public Task() {
 

@@ -8,47 +8,31 @@ VALUES (1, 'Example Board', 1);
 
 -- inserting taskboard to board
 INSERT INTO task_list (list_id, list_name, board_id)
-VALUES (1, 'Example Task ListExample Task ListExample Task ListExample Task ListExample Task ListExample Task List', 1);
+VALUES (1, 'Example Task ListExample', 1);
 
-INSERT INTO task_list (list_id, list_name, board_id)
-VALUES (2, 'E', 1);
 
-INSERT INTO task_list (list_id, list_name, board_id)
-VALUES (3, '', 1);
-
-INSERT INTO task_list (list_id, list_name, board_id)
-VALUES (4, 'Example Task List', 1);
-
-INSERT INTO task_list (list_id, list_name, board_id)
-VALUES (5, 'Example Task List', 1);
-
-INSERT INTO task_list (list_id, list_name, board_id)
-VALUES (6, 'Example Task List', 1);
-
-INSERT INTO task_list (list_id, list_name, board_id)
-VALUES (7, 'Example Task List', 1);
 
 -- inserting task to taskboard
 INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
-VALUES (1, 'Example TaskExample TaskExample TaskExample Task', 'Task description Task descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionXD', '2023-12-31', 'Pending', 1);
+VALUES (1, 'Example TaskExample TaskExample TaskExample Task', 'Task description Task descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask descriptionXD', '2023-12-31', 'TODO', 1);
 
-INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
-VALUES (2, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
+-- inserting comment to task
+INSERT INTO comment (id, content, created_at, user_id, task_id)
+VALUES (1, 'Comment 1 for Task 1', CURRENT_TIMESTAMP, 1, 1);
 
-INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
-VALUES (3, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
+INSERT INTO comment (id, content, created_at, user_id, task_id)
+VALUES (2, 'Comment 2 for Task 1', CURRENT_TIMESTAMP, 1, 1);
 
-INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
-VALUES (4, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
+-- inserting attachment to task
+INSERT INTO attachment (id, link, display_text, created_at, task_id)
+VALUES (1, 'file1.txt', 'File 1', CURRENT_TIMESTAMP, 1);
 
-INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
-VALUES (5, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
+INSERT INTO attachment (id, link, display_text, created_at, task_id)
+VALUES (2, 'file2.txt', 'File 2', CURRENT_TIMESTAMP, 1);
 
-INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
-VALUES (6, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
+-- inserting label to task
+INSERT INTO label (id, name, color, task_id)
+VALUES (1, 'Label 1', 'RED', 1);
 
-INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
-VALUES (7, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
-
-INSERT INTO task (task_id, task_name, description, due_date, status, list_id)
-VALUES (8, 'Example Task', 'Task description', '2023-12-31', 'Pending', 1);
+INSERT INTO label (id, name, color, task_id)
+VALUES (2, 'Label 2', 'GREEN', 1);

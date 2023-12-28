@@ -33,6 +33,7 @@ public class TaskList {
     public void addTask(String taskName) {
         Task task = Task.builder()
                 .taskName(taskName)
+                .status(Task.TaskStatus.TODO)
                 .taskList(this)
                 .build();
 
