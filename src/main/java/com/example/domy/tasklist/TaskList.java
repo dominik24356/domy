@@ -2,16 +2,16 @@ package com.example.domy.tasklist;
 
 import com.example.domy.board.Board;
 import com.example.domy.task.Task;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,9 +24,11 @@ public class TaskList {
 
     @ManyToOne
     @JoinColumn(name = "board_id")
+    @JsonBackReference
     private Board board;
 
     @OneToMany(mappedBy = "taskList", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Task> tasks;
 
 

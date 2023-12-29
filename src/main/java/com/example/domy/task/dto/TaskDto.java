@@ -1,5 +1,6 @@
 package com.example.domy.task.dto;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +15,10 @@ public class TaskDto {
     private String description;
     private Date dueDate;
     private String status;
+    private CommentDto[] comments;
+    private AttachmentDto[] attachments;
+    private LabelDto[] labels;
 
-    // assigned users
+
 
 }

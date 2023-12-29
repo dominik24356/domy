@@ -11,7 +11,8 @@ import java.util.Optional;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    Optional<Task> getByTaskId(Long id);
+    Optional<Task> findByTaskId(Long id);
+
 
     @Query("SELECT task FROM User u " +
             "JOIN u.boards b " +

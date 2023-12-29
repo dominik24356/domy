@@ -26,7 +26,8 @@ public class TaskService {
     }
 
     public TaskDto getTaskById(Long taskId) {
-        return taskMapper.mapToTaskDto(taskRepository.getByTaskId(taskId).orElseThrow(() -> new TaskNotFoundException(taskId))) ;
+        Task task = taskRepository.findByTaskId(taskId).orElseThrow(() -> new TaskNotFoundException(taskId));
+        return taskMapper.mapToTaskDto(task);
     }
 
     public List<TaskDto> getTasksByUserId(Long userId) {
