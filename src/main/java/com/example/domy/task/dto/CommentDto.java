@@ -3,7 +3,7 @@ package com.example.domy.task.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Getter
 @Setter
@@ -13,7 +13,9 @@ public class CommentDto {
 
     private String content;
 
-    private Date createdAt;
+    private Timestamp createdAt;
+
+    private String authorName;
 
 
 }

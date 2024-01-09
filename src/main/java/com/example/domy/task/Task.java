@@ -11,7 +11,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -25,7 +25,7 @@ public class Task {
         TODO,
         IN_PROGRESS,
         COMPLETED,
-        ON_HOLD
+        CANCELED,
     }
 
     @Id
@@ -34,7 +34,7 @@ public class Task {
     @NotBlank
     private String taskName;
     private String description;
-    private Date dueDate;
+    private Timestamp dueDate;
     @Enumerated(EnumType.STRING)
     private TaskStatus status;
 

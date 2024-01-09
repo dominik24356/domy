@@ -4,7 +4,8 @@ package com.example.domy.task.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,11 +14,11 @@ public class TaskDto {
 
     private String taskName;
     private String description;
-    private Date dueDate;
+    private Timestamp dueDate;
     private String status;
-    private CommentDto[] comments;
-    private AttachmentDto[] attachments;
-    private LabelDto[] labels;
+    private List<CommentDto> comments;
+    private List<AttachmentDto> attachments;
+    private List<LabelDto> labels;
 
 
 

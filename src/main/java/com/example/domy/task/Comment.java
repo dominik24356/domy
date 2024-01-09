@@ -2,10 +2,11 @@ package com.example.domy.task;
 
 import com.example.domy.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Getter
@@ -29,6 +30,6 @@ public class Comment {
     private String content;
 
 
-    private Date createdAt;
+    private Timestamp createdAt;
 
 }

@@ -2,6 +2,7 @@ package com.example.domy.task;
 
 import com.example.domy.task.dto.TaskDto;
 import com.example.domy.task.exception.TaskNotFoundException;
+import com.example.domy.task.mapper.TaskMapper;
 import com.example.domy.tasklist.TaskListService;
 import com.example.domy.user.User;
 import com.example.domy.user.UserService;
