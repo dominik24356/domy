@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -18,14 +19,17 @@ public class User {
     private Long userId;
 
     @Column(length = 100)
+    @Size(max = 100)
     @NotBlank
     private String username;
 
     @Column(length = 100)
+    @Size(max = 100)
     @NotBlank
     private String login;
 
     @Column(length = 100)
+    @Size(max = 100)
     @NotBlank
     private String password;
 

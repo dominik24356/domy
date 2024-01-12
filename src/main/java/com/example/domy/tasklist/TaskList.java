@@ -8,6 +8,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -22,6 +23,7 @@ public class TaskList {
     private Long listId;
 
     @Column(length = 100)
+    @Size(max = 100)
     @NotBlank
     private String listName;
 

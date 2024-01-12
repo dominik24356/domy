@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -31,7 +32,7 @@ public class TaskListController {
      }
 
      @PostMapping("/boards/{board-id}/task-lists")
-     ResponseEntity<Void> createTaskList(@RequestBody TaskListCreateRequest createRequest, @PathVariable(name = "board-id") Long boardId) {
+     ResponseEntity<Void> createTaskList(@Valid @RequestBody TaskListCreateRequest createRequest, @PathVariable(name = "board-id") Long boardId) {
           taskListService.createTaskList(createRequest.getListName(), boardId);
           return new ResponseEntity<>(HttpStatus.CREATED);
      }

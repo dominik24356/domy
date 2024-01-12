@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -33,7 +34,7 @@ public class TaskController {
     }
 
     @PostMapping("/task-lists/{list-id}/tasks")
-    public ResponseEntity<Void> addTaskToList(@RequestBody TaskCreateRequest createRequest, @PathVariable(name = "list-id") Long listId) {
+    public ResponseEntity<Void> addTaskToList(@Valid @RequestBody TaskCreateRequest createRequest, @PathVariable(name = "list-id") Long listId) {
         taskService.addTask(createRequest.getTaskName(), listId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
 

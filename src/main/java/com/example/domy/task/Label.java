@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -29,6 +30,7 @@ public class Label {
     private Task task;
 
     @Column(length = 100)
+    @Size(max = 100)
     @NotBlank
     private String name;
 

@@ -12,6 +12,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -34,8 +35,10 @@ public class Task {
     private Long taskId;
     @NotBlank
     @Column(length = 200)
+    @Size(max = 200)
     private String taskName;
     @Column(length = 1000)
+    @Size(max = 1000)
     private String description;
 
     private Timestamp dueDate;
