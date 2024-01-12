@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 @Entity
@@ -27,9 +28,10 @@ public class Comment {
     @JsonBackReference
     private Task task;
 
+    @Column(length = 200)
     private String content;
 
-
+    @NotNull
     private Timestamp createdAt;
 
 }

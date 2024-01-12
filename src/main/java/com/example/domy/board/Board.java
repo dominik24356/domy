@@ -24,6 +24,7 @@ public class Board {
     @JsonBackReference
     private User user;
 
+    @Column(length = 100)
     private String boardName;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)

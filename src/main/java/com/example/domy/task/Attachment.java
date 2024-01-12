@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 @Entity
@@ -20,10 +22,14 @@ public class Attachment {
     @JsonBackReference
     private Task task;
 
+    @Column(length = 1000)
+    @NotBlank
     private String link;
 
+    @Column(length = 100)
     private String name;
 
+    @NotNull
     private Timestamp createdAt;
 
 

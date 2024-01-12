@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -26,9 +28,12 @@ public class Label {
     @JsonBackReference
     private Task task;
 
+    @Column(length = 100)
+    @NotBlank
     private String name;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private LabelColor color;
 
 

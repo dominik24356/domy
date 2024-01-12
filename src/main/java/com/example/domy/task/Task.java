@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -32,10 +33,14 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
     @NotBlank
+    @Column(length = 200)
     private String taskName;
+    @Column(length = 1000)
     private String description;
+
     private Timestamp dueDate;
     @Enumerated(EnumType.STRING)
+    @NotNull
     private TaskStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,8 @@ public class TaskList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long listId;
 
+    @Column(length = 100)
+    @NotBlank
     private String listName;
 
     @ManyToOne

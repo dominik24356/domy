@@ -1,6 +1,6 @@
 package com.example.domy.task;
 
-import com.example.domy.task.dto.AddTaskDto;
+import com.example.domy.task.dto.TaskCreateRequest;
 import com.example.domy.task.dto.TaskDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +33,8 @@ public class TaskController {
     }
 
     @PostMapping("/task-lists/{list-id}/tasks")
-    public ResponseEntity<Void> addTaskToList(@RequestBody AddTaskDto addTaskDto, @PathVariable(name = "list-id") Long listId) {
-        taskService.addTask(addTaskDto.getTaskName(), listId);
+    public ResponseEntity<Void> addTaskToList(@RequestBody TaskCreateRequest createRequest, @PathVariable(name = "list-id") Long listId) {
+        taskService.addTask(createRequest.getTaskName(), listId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }

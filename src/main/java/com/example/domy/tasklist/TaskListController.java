@@ -1,6 +1,6 @@
 package com.example.domy.tasklist;
 
-import com.example.domy.tasklist.dto.CreateTaskListDto;
+import com.example.domy.tasklist.dto.TaskListCreateRequest;
 import com.example.domy.tasklist.dto.TaskListDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +31,8 @@ public class TaskListController {
      }
 
      @PostMapping("/boards/{board-id}/task-lists")
-     ResponseEntity<Void> createTaskList(@RequestBody CreateTaskListDto createTaskListDto, @PathVariable(name = "board-id") Long boardId) {
-          taskListService.createTaskList(createTaskListDto.getListName(), boardId);
+     ResponseEntity<Void> createTaskList(@RequestBody TaskListCreateRequest createRequest, @PathVariable(name = "board-id") Long boardId) {
+          taskListService.createTaskList(createRequest.getListName(), boardId);
           return new ResponseEntity<>(HttpStatus.CREATED);
      }
 }

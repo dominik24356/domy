@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -16,8 +17,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
+    @Column(length = 100)
+    @NotBlank
     private String username;
+
+    @Column(length = 100)
+    @NotBlank
     private String login;
+
+    @Column(length = 100)
+    @NotBlank
     private String password;
 
     @OneToMany(mappedBy = "user")
