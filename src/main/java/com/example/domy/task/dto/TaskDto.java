@@ -1,9 +1,11 @@
 package com.example.domy.task.dto;
 
 
+import com.example.domy.task.Task;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -15,7 +17,7 @@ public class TaskDto {
     private String taskName;
     private String description;
     private Timestamp dueDate;
-    private String status;
+    private Task.TaskStatus status;
     private List<CommentDto> comments;
     private List<AttachmentDto> attachments;
     private List<LabelDto> labels;

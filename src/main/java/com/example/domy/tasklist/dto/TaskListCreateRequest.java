@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 public class TaskListCreateRequest {
-    @Size(max = 100)
-    @NotBlank
+    @Size(max = 100, message = "List name cannot be longer than 100 characters")
+    @NotBlank(message = "List name cannot be blank")
     private String listName;
 }
