@@ -1,13 +1,14 @@
 package com.example.domy.task;
 
+import com.example.domy.exception.EntityNotFoundException;
 import com.example.domy.task.dto.TaskDto;
 import com.example.domy.task.dto.TaskUpdateRequest;
-import com.example.domy.task.exception.TaskNotFoundException;
 import com.example.domy.task.mapper.TaskMapper;
 import com.example.domy.tasklist.TaskListService;
 import com.example.domy.user.User;
 import com.example.domy.user.UserService;
 import org.springframework.stereotype.Service;
+
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -33,7 +34,7 @@ public class TaskService {
     }
 
     private Task getTaskByIdInternal(Long taskId) {
-        return taskRepository.findByTaskId(taskId).orElseThrow(() -> new TaskNotFoundException(taskId));
+        return taskRepository.findByTaskId(taskId).orElseThrow(() -> new EntityNotFoundException(Task.class, "id", taskId.toString()));
     }
 
     public List<TaskDto> getTasksByUserId(Long userId) {

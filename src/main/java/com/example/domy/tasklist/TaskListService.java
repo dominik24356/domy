@@ -2,9 +2,10 @@ package com.example.domy.tasklist;
 
 import com.example.domy.board.Board;
 import com.example.domy.board.BoardService;
+import com.example.domy.exception.EntityNotFoundException;
 import com.example.domy.tasklist.dto.TaskListDto;
-import com.example.domy.tasklist.exception.TaskListNotFoundException;
 import org.springframework.stereotype.Service;
+
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -48,7 +49,7 @@ public class TaskListService {
     }
 
     public TaskList getTaskListById(Long id) {
-        return taskListRepository.findById(id).orElseThrow(() -> new TaskListNotFoundException(id));
+        return taskListRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(TaskList.class, "id", id.toString()));
     }
 
     public void addTask(String taskName, Long listId) {

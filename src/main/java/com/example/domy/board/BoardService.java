@@ -1,10 +1,11 @@
 package com.example.domy.board;
 
 import com.example.domy.board.dto.BoardDto;
-import com.example.domy.board.exception.BoardNotFoundException;
+import com.example.domy.exception.EntityNotFoundException;
 import com.example.domy.user.User;
 import com.example.domy.user.UserService;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class BoardService {
     }
 
     public Board getBoardById(Long boardId) {
-        return boardRepository.findById(boardId).orElseThrow(() -> new BoardNotFoundException(boardId));
+        return boardRepository.findById(boardId).orElseThrow(() -> new EntityNotFoundException(Board.class, "id", boardId.toString()));
     }
 
     public List<BoardDto> getBoardsByUserId(Long userId) {
