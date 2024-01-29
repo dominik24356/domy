@@ -5,13 +5,13 @@ import com.example.domy.task.dto.TaskDto;
 import com.example.domy.task.dto.TaskUpdateRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping( "/api")
 public class TaskController {
 
     private TaskService taskService;

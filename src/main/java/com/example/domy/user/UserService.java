@@ -2,12 +2,15 @@ package com.example.domy.user;
 
 import com.example.domy.exception.EntityNotFoundException;
 import com.example.domy.user.dto.UserDto;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     UserRepository userRepository;
     UserMapper userMapper;
@@ -23,5 +26,10 @@ public class UserService {
 
     public User getUserById(Long userId) {
         return  userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException(User.class, "id", userId.toString()));
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
     }
 }

@@ -1,6 +1,6 @@
 -- inserting user
-INSERT INTO user (user_id, login, password, username)
-VALUES (1, 'login', 'password', 'username');
+INSERT INTO user (user_id, name, password, username)
+VALUES (1, 'Jack', '$2y$10$U9W.2XuqVecQwj/LF7zCbOdBZ4/ri398WSxcq97b9OU7AlXoEkyUK', 'username');
 
 -- inserting board of user
 INSERT INTO board (board_id, board_name, user_id)
