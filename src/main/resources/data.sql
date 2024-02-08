@@ -2,13 +2,22 @@
 INSERT INTO user (user_id, name, password, username)
 VALUES (1, 'Jack', '$2y$10$U9W.2XuqVecQwj/LF7zCbOdBZ4/ri398WSxcq97b9OU7AlXoEkyUK', 'username');
 
+INSERT INTO user (user_id, name, password, username)
+VALUES (2, 'Daniels', '$2y$10$U9W.2XuqVecQwj/LF7zCbOdBZ4/ri398WSxcq97b9OU7AlXoEkyUK', 'daniels');
+
 -- inserting board of user
 INSERT INTO board (board_id, board_name, user_id)
 VALUES (1, 'Example Board', 1);
 
--- inserting taskboard to board
+INSERT INTO board (board_id, board_name, user_id)
+VALUES (2, 'Example Board', 2);
+
+-- inserting tasklist to board
 INSERT INTO task_list (list_id, list_name, board_id)
 VALUES (1, 'Example Task ListExample', 1);
+
+INSERT INTO task_list (list_id, list_name, board_id)
+VALUES (2, 'Example Task ListExample', 2);
 
 
 

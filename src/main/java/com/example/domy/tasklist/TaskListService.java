@@ -4,6 +4,7 @@ import com.example.domy.board.Board;
 import com.example.domy.board.BoardService;
 import com.example.domy.exception.EntityNotFoundException;
 import com.example.domy.tasklist.dto.TaskListDto;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 
@@ -56,5 +57,9 @@ public class TaskListService {
         TaskList taskList = getTaskListById(listId);
         taskList.addTask(taskName);
         taskListRepository.save(taskList);
+    }
+
+    public boolean isUserOwnerOfList(Authentication authentication, Long listId) {
+        return boardService.isBoardOwner(authentication, getTaskListById(listId).getBoard());
     }
 }

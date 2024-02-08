@@ -1,5 +1,6 @@
 package com.example.domy.task;
 
+import com.example.domy.board.BoardService;
 import com.example.domy.exception.EntityNotFoundException;
 import com.example.domy.task.dto.TaskDto;
 import com.example.domy.task.dto.TaskUpdateRequest;
@@ -7,6 +8,7 @@ import com.example.domy.task.mapper.TaskMapper;
 import com.example.domy.tasklist.TaskListService;
 import com.example.domy.user.User;
 import com.example.domy.user.UserService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 
@@ -22,11 +24,14 @@ public class TaskService {
 
     private TaskListService taskListService;
 
-    public TaskService(TaskRepository taskRepository, TaskMapper taskMapper, UserService userService, TaskListService taskListService) {
+    private BoardService boardService;
+
+    public TaskService(TaskRepository taskRepository, TaskMapper taskMapper, UserService userService, TaskListService taskListService, BoardService boardService) {
         this.taskRepository = taskRepository;
         this.taskMapper = taskMapper;
         this.userService = userService;
         this.taskListService = taskListService;
+        this.boardService = boardService;
     }
 
     public TaskDto getTaskById(Long taskId) {
@@ -60,5 +65,9 @@ public class TaskService {
         taskMapper.updateTaskFromDto(updateRequest, taskToUpdate);
 
         taskRepository.save(taskToUpdate);
+    }
+
+    public boolean isTaskOwner(Authentication authentication, Long taskId) {
+        return boardService.isBoardOwner(authentication, getTaskByIdInternal(taskId).getTaskList().getBoard());
     }
 }

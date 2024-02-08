@@ -2,6 +2,7 @@ package com.example.domy.user;
 
 import com.example.domy.exception.EntityNotFoundException;
 import com.example.domy.user.dto.UserDto;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
