@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Collection;
@@ -20,19 +21,25 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 public class User implements UserDetails {
+
+    public enum Role {
+        ROLE_USER, ROLE_ADMIN
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
     @Column(length = 100, unique = true)
-    @Size(max = 100)
+    @Size(max = 100, min = 8)
     @NotBlank
     private String username;
 
     @Column(length = 100)
     @Size(max = 100)
     @NotBlank
-    private String name;
+    @Email
+    private String email;
 
     @Column(length = 1000)
     @NotBlank

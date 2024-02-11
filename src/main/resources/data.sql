@@ -1,8 +1,8 @@
 -- inserting user
-INSERT INTO user (user_id, name, password, username)
+INSERT INTO user (user_id, email, password, username)
 VALUES (1, 'Jack', '$2y$10$U9W.2XuqVecQwj/LF7zCbOdBZ4/ri398WSxcq97b9OU7AlXoEkyUK', 'username');
 
-INSERT INTO user (user_id, name, password, username)
+INSERT INTO user (user_id, email, password, username)
 VALUES (2, 'Daniels', '$2y$10$U9W.2XuqVecQwj/LF7zCbOdBZ4/ri398WSxcq97b9OU7AlXoEkyUK', 'daniels');
 
 -- inserting board of user

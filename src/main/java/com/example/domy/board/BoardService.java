@@ -49,4 +49,13 @@ public class BoardService {
         User user = userService.getUserById(userId);
         return boardMapper.mapToListOfBoardDto(boardRepository.getBoardsByUser(user)) ;
     }
+
+    public List<BoardDto> getBoardsByUserUsername(String username) {
+        if (username.isBlank()){
+            throw new IllegalArgumentException("Username cannot be blank");
+        }
+
+        User user = userService.getUserByUsername(username);
+        return boardMapper.mapToListOfBoardDto(boardRepository.getBoardsByUser(user));
+    }
 }
