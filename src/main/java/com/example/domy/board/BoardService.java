@@ -58,4 +58,17 @@ public class BoardService {
         User user = userService.getUserByUsername(username);
         return boardMapper.mapToListOfBoardDto(boardRepository.getBoardsByUser(user));
     }
+
+    public BoardDto createBoard(String title, User user) {
+        if(title.isBlank()) {
+            throw new IllegalArgumentException("Title cannot be blank");
+        }
+
+        Board board = new Board();
+        board.setBoardName(title);
+        board.setUser(user);
+
+
+        return boardMapper.mapToBoardDto(boardRepository.save(board));
+    }
 }
