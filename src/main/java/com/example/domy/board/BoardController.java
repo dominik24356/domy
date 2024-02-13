@@ -50,6 +50,11 @@ public class BoardController {
         return ResponseEntity.created(URI.create("/api/boards/" + boardService.createBoard(title, user).getBoardId())).build();
     }
 
+    @DeleteMapping("/boards/{board-id}")
+    public ResponseEntity<Void> deleteBoardById(@PathVariable(name = "board-id") Long boardId) {
+        boardService.deleteBoardById(boardId);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

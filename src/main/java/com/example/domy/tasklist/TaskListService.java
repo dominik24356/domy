@@ -31,8 +31,11 @@ public class TaskListService {
 
     @Transactional
     public void deleteTaskListById(Long taskListId) {
-        TaskList taskList = getTaskListById(taskListId);
-        taskListRepository.delete(taskList);
+        try {
+            taskListRepository.deleteById(taskListId);
+        } catch (Exception e) {
+            throw new EntityNotFoundException(TaskList.class, "id", taskListId.toString());
+        }
     }
 
     public void createTaskList(String title, Long boardId) {

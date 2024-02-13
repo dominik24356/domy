@@ -2,12 +2,14 @@ package com.example.domy.board;
 
 import com.example.domy.board.dto.BoardDto;
 import com.example.domy.exception.EntityNotFoundException;
+import com.example.domy.tasklist.TaskList;
 import com.example.domy.user.User;
 import com.example.domy.user.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -71,4 +73,14 @@ public class BoardService {
 
         return boardMapper.mapToBoardDto(boardRepository.save(board));
     }
+
+    @Transactional
+    public void deleteBoardById(Long boardId) {
+        try {
+            boardRepository.deleteById(boardId);
+        } catch (Exception e) {
+            throw new EntityNotFoundException(Board.class, "id", boardId.toString());
+        }
+    }
+
 }
