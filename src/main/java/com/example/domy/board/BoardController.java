@@ -24,13 +24,13 @@ public class BoardController {
 
     @GetMapping("/boards/{board-id}")
     @PreAuthorize("hasRole('ROLE_ADMIN') or @boardService.isBoardOwner(authentication, #boardId)")
-    public ResponseEntity<BoardDto> getBoardById(@PathVariable(name = "board-id") Long boardId) {
+    public ResponseEntity<BoardDto> getAllBoardById(@PathVariable(name = "board-id") Long boardId) {
         return ResponseEntity.ok(boardService.getBoardDtoById(boardId));
     }
 
     @GetMapping("/users/{user-id}/boards")
     @PreAuthorize("#userId == authentication.principal.userId or hasRole('ROLE_ADMIN')")
-    public ResponseEntity<List<BoardDto>> getBoardsByUserId(@PathVariable(name = "user-id") Long userId) {
+    public ResponseEntity<List<BoardDto>> getAllBoardsByUserId(@PathVariable(name = "user-id") Long userId) {
         return ResponseEntity.ok(boardService.getBoardsByUserId(userId));
     }
 
@@ -41,7 +41,7 @@ public class BoardController {
 //    }
 
     @GetMapping("/boards")
-    public ResponseEntity<List<BoardDto>> getBoardsForUser(@AuthenticationPrincipal User user) {
+    public ResponseEntity<List<BoardDto>> getAllBoardsForLoggedInUser(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok(boardService.getBoardsByUserUsername(user.getUsername()));
     }
 

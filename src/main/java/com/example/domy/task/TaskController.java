@@ -31,7 +31,7 @@ public class TaskController {
 
     @GetMapping("/users/{user-id}/tasks")
     @PreAuthorize("#userId == authentication.principal.userId or hasRole('ROLE_ADMIN')")
-    public ResponseEntity<List<TaskDto>> getTasksByUserId(@PathVariable(name = "user-id") Long userId) {
+    public ResponseEntity<List<TaskDto>> getAllTasksByUserId(@PathVariable(name = "user-id") Long userId) {
         return ResponseEntity.ok(taskService.getTasksByUserId(userId));
     }
 
