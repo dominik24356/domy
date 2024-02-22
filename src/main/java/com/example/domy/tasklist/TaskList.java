@@ -27,8 +27,8 @@ public class TaskList {
     @NotBlank
     private String listName;
 
-    @ManyToOne
-    @JoinColumn(name = "board_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "board_id", nullable = false)
     @JsonBackReference
     private Board board;
 

@@ -46,7 +46,7 @@ public class User implements UserDetails {
     @NotBlank
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Board> boards;
 

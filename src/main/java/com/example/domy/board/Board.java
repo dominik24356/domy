@@ -15,19 +15,20 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "boardName"}))
 public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private User user;
 
-    @Column(length = 100)
-    @Size(max = 100)
+    @Column(length = 100, unique = true, nullable = false)
+    @Size(min=1,max = 100)
     @NotBlank
     private String boardName;
 

@@ -62,16 +62,21 @@ public class BoardService {
     }
 
     public BoardDto createBoard(String title, User user) {
-        if(title.isBlank()) {
-            throw new IllegalArgumentException("Title cannot be blank");
-        }
+        violateBoardTitle(title, user);
 
         Board board = new Board();
         board.setBoardName(title);
         board.setUser(user);
 
-
         return boardMapper.mapToBoardDto(boardRepository.save(board));
+    }
+
+    private void violateBoardTitle(String title, User user) {
+        if(title.isBlank()) {
+            throw new IllegalArgumentException("Title cannot be blank");
+        } else if (boardRepository.existsByUserAndBoardName(user, title)) {
+            throw new IllegalArgumentException(String.format("Board with title '%s' already exists for username '%s'", title, user.getUsername()));
+        }
     }
 
     @Transactional

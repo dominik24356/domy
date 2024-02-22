@@ -7,10 +7,10 @@ VALUES (2, 'Daniels', '$2y$10$U9W.2XuqVecQwj/LF7zCbOdBZ4/ri398WSxcq97b9OU7AlXoEk
 
 -- inserting board of user
 INSERT INTO board (board_id, board_name, user_id)
-VALUES (1, 'Example Board', 1);
+VALUES (1, 'Example Board1', 1);
 
 INSERT INTO board (board_id, board_name, user_id)
-VALUES (2, 'Example Board', 2);
+VALUES (2, 'Example Board2', 2);
 
 -- inserting tasklist to board
 INSERT INTO task_list (list_id, list_name, board_id)

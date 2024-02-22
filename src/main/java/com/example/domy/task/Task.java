@@ -47,8 +47,8 @@ public class Task {
     @Column(nullable = false)
     private TaskStatus status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "list_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "list_id", nullable = false)
     @JsonBackReference
     private TaskList taskList;
 
