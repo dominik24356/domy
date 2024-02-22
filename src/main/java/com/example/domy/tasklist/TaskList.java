@@ -22,8 +22,8 @@ public class TaskList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long listId;
 
-    @Column(length = 100)
-    @Size(max = 100)
+    @Column(length = 100, nullable = false)
+    @Size(min=1, max = 100)
     @NotBlank
     private String listName;
 

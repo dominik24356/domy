@@ -29,13 +29,14 @@ public class Label {
     @JsonBackReference
     private Task task;
 
-    @Column(length = 100)
-    @Size(max = 100)
+    @Column(length = 100, nullable = false)
+    @Size(min=1,max = 100)
     @NotBlank
     private String name;
 
     @Enumerated(EnumType.STRING)
     @NotNull
+    @Column(nullable = false)
     private LabelColor color;
 
 

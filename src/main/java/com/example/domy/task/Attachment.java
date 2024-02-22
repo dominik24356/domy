@@ -3,6 +3,7 @@ package com.example.domy.task;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -24,8 +25,9 @@ public class Attachment {
     private Task task;
 
     @Column(length = 1000)
-    @Size(max = 1000)
+    @Size(min=1,max = 1000)
     @NotBlank
+    @URL
     private String link;
 
     @Column(length = 100)
@@ -33,6 +35,7 @@ public class Attachment {
     private String name;
 
     @NotNull
+    @Column(nullable = false)
     private Timestamp createdAt;
 
 

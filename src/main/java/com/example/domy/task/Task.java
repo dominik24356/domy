@@ -34,8 +34,8 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
     @NotBlank
-    @Column(length = 200)
-    @Size(max = 200)
+    @Column(length = 200, nullable = false)
+    @Size(min=1,max = 200)
     private String taskName;
     @Column(length = 1000)
     @Size(max = 1000)
@@ -44,6 +44,7 @@ public class Task {
     private Timestamp dueDate;
     @Enumerated(EnumType.STRING)
     @NotNull
+    @Column(nullable = false)
     private TaskStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)

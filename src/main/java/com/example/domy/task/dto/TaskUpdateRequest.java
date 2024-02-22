@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 @Setter
 public class TaskUpdateRequest {
     @NotBlank(message = "Task name cannot be blank")
-    @Size(max = 200, message = "Task name cannot be longer than 200 characters")
+    @Size(min=1,max = 200, message = "Task name cannot be longer than 200 characters")
     private String taskName;
     @Size(max = 1000, message = "Description cannot be longer than 1000 characters")
     private String description;

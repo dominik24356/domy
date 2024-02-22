@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
@@ -30,10 +31,12 @@ public class Comment {
     private Task task;
 
     @Column(length = 200)
-    @Size(max = 200)
+    @Size(min=1,max = 200)
+    @NotBlank
     private String content;
 
     @NotNull
+    @Column(nullable = false)
     private Timestamp createdAt;
 
 }

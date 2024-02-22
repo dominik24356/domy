@@ -3,7 +3,6 @@ package com.example.domy.task;
 import com.example.domy.task.dto.TaskCreateRequest;
 import com.example.domy.task.dto.TaskDto;
 import com.example.domy.task.dto.TaskUpdateRequest;
-import com.example.domy.tasklist.TaskListService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

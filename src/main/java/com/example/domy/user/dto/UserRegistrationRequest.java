@@ -15,7 +15,7 @@ public class UserRegistrationRequest {
     @Size(min = 8, max = 100)
     private String username;
 
-    @Size(max = 100)
+    @Size(min=1,max = 100)
     @NotBlank
     @Email
     private String email;

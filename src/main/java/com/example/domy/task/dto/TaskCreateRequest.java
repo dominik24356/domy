@@ -11,6 +11,6 @@ import javax.validation.constraints.Size;
 public class TaskCreateRequest {
 
     @NotBlank
-    @Size(max = 200, message = "Task name cannot be longer than 200 characters")
+    @Size(min=1,max = 200, message = "Task name cannot be longer than 200 characters")
     private String taskName;
 }
