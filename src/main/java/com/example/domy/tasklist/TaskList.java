@@ -37,7 +37,7 @@ public class TaskList {
     private List<Task> tasks;
 
 
-    public void addTask(String taskName) {
+    public Task addTask(String taskName) {
         Task task = Task.builder()
                 .taskName(taskName)
                 .status(Task.TaskStatus.TODO)
@@ -45,5 +45,6 @@ public class TaskList {
                 .build();
 
         tasks.add(task);
+        return task;
     }
 }

@@ -3,6 +3,10 @@ package com.example.domy.tasklist;
 import com.example.domy.board.Board;
 import com.example.domy.board.BoardService;
 import com.example.domy.exception.EntityNotFoundException;
+import com.example.domy.task.Task;
+import com.example.domy.task.dto.TaskDto;
+import com.example.domy.task.mapper.TaskMapper;
+import com.example.domy.tasklist.dto.TaskListCreateRequest;
 import com.example.domy.tasklist.dto.TaskListDto;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -14,17 +18,20 @@ import java.util.List;
 @Service
 public class TaskListService {
 
-    BoardService boardService;
-    TaskListRepository taskListRepository;
-    TaskListMapper taskListMapper;
+    private final BoardService boardService;
+    private final TaskListRepository taskListRepository;
+    private final TaskListMapper taskListMapper;
 
-    public TaskListService(BoardService boardService, TaskListRepository taskListRepository, TaskListMapper taskListMapper) {
+    private final TaskMapper taskMapper;
+
+    public TaskListService(BoardService boardService, TaskListRepository taskListRepository, TaskListMapper taskListMapper, TaskMapper taskMapper) {
         this.boardService = boardService;
         this.taskListRepository = taskListRepository;
         this.taskListMapper = taskListMapper;
+        this.taskMapper = taskMapper;
     }
 
-    public List<TaskListDto> getAllTaskListsDtoByBoardId(Long boardId) {
+    public List<TaskListDto> getAllTaskListsByBoardId(Long boardId) {
         Board board = boardService.getBoardById(boardId);
         return  taskListMapper.mapToTaskListsDto(taskListRepository.getTaskListsByBoard(board));
     }
@@ -38,28 +45,29 @@ public class TaskListService {
         }
     }
 
-    public void createTaskList(String title, Long boardId) {
+    public TaskListDto addTaskListToBoard(TaskListCreateRequest request, Long boardId) {
+        Board board = boardService.getBoardById(boardId);
+        TaskList taskList = TaskList.builder()
+                .listName(request.getListName().trim())
+                .board(board)
+                .build();
 
-        if(!title.isBlank()) {
-            Board board = boardService.getBoardById(boardId);
-
-            TaskList taskList = TaskList.builder()
-                    .listName(title)
-                    .board(board)
-                    .build();
-
-            taskListRepository.save(taskList);
-        }
+        return taskListMapper.mapToTaskListDto(taskListRepository.save(taskList));
     }
 
-    public TaskList getTaskListById(Long id) {
+    private TaskList getTaskListById(Long id) {
         return taskListRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(TaskList.class, "id", id.toString()));
     }
 
-    public void addTask(String taskName, Long listId) {
+    public TaskListDto getTaskListDtoById(Long id) {
+        return taskListMapper.mapToTaskListDto(getTaskListById(id));
+    }
+
+    public TaskDto addTaskToList(String taskName, Long listId) {
         TaskList taskList = getTaskListById(listId);
-        taskList.addTask(taskName);
+        Task task = taskList.addTask(taskName.trim());
         taskListRepository.save(taskList);
+        return taskMapper.mapToTaskDto(task);
     }
 
     public boolean isUserOwnerOfList(Authentication authentication, Long listId) {

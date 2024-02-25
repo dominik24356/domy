@@ -3,22 +3,28 @@ package com.example.domy.task;
 import com.example.domy.task.dto.TaskCreateRequest;
 import com.example.domy.task.dto.TaskDto;
 import com.example.domy.task.dto.TaskUpdateRequest;
+import com.example.domy.tasklist.TaskListService;
+import com.example.domy.tasklist.dto.TaskListDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
 @RequestMapping( "/api")
 public class TaskController {
 
-    private TaskService taskService;
+    private final TaskService taskService;
 
-    public TaskController(TaskService taskService) {
+    private final TaskListService taskListService;
+
+    public TaskController(TaskService taskService, TaskListService taskListService) {
         this.taskService = taskService;
+        this.taskListService = taskListService;
     }
 
 
@@ -37,8 +43,8 @@ public class TaskController {
     @PostMapping("/task-lists/{list-id}/tasks")
     @PreAuthorize("@taskListService.isUserOwnerOfList(authentication, #listId) or hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> addTaskToList(@Valid @RequestBody TaskCreateRequest createRequest, @PathVariable(name = "list-id") Long listId) {
-        taskService.addTask(createRequest.getTaskName(), listId);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        TaskDto taskDto = taskListService.addTaskToList(createRequest.getTaskName(), listId);
+        return ResponseEntity.created(URI.create("/api/tasks/" + taskDto.getTaskId())).build();
     }
 
     @PutMapping("/tasks/{task-id}")

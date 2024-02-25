@@ -47,9 +47,6 @@ public class TaskService {
         return taskMapper.mapToListOfTaskDto(taskRepository.findTasksByUser(user)) ;
     }
 
-    public void addTask(String taskName, Long listId) {
-        taskListService.addTask(taskName.trim(), listId);
-    }
 
     @Transactional
     public void updateTask(Long taskId, TaskUpdateRequest updateRequest) {

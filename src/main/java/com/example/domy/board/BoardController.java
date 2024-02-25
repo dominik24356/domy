@@ -1,5 +1,6 @@
 package com.example.domy.board;
 
+import com.example.domy.board.dto.BoardCreateRequest;
 import com.example.domy.board.dto.BoardDto;
 import com.example.domy.user.User;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -14,7 +16,7 @@ import java.util.List;
 @RequestMapping( "/api")
 public class BoardController {
 
-    BoardService boardService;
+    private final BoardService boardService;
 
 
     public BoardController(BoardService boardService) {
@@ -24,7 +26,7 @@ public class BoardController {
 
     @GetMapping("/boards/{board-id}")
     @PreAuthorize("hasRole('ROLE_ADMIN') or @boardService.isBoardOwner(authentication, #boardId)")
-    public ResponseEntity<BoardDto> getAllBoardById(@PathVariable(name = "board-id") Long boardId) {
+    public ResponseEntity<BoardDto> getBoardById(@PathVariable(name = "board-id") Long boardId) {
         return ResponseEntity.ok(boardService.getBoardDtoById(boardId));
     }
 
@@ -46,8 +48,8 @@ public class BoardController {
     }
 
     @PostMapping("/boards")
-    public ResponseEntity<BoardDto> createBoard(@RequestParam(name = "title") String title, @AuthenticationPrincipal User user) {
-        return ResponseEntity.created(URI.create("/api/boards/" + boardService.createBoard(title, user).getBoardId())).build();
+    public ResponseEntity<BoardDto> createBoard(@Valid @RequestBody BoardCreateRequest boardCreateRequest, @AuthenticationPrincipal User user) {
+        return ResponseEntity.created(URI.create("/api/boards/" + boardService.createBoard(boardCreateRequest, user).getBoardId())).build();
     }
 
     @DeleteMapping("/boards/{board-id}")

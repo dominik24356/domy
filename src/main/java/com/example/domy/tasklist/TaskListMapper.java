@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = TaskMapper.class)
 public interface TaskListMapper {
 
-
     List<TaskListDto> mapToTaskListsDto(List<TaskList> taskLists);
+
+    TaskListDto mapToTaskListDto(TaskList taskList);
 }

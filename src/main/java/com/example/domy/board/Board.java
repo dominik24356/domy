@@ -4,8 +4,7 @@ import com.example.domy.tasklist.TaskList;
 import com.example.domy.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -16,6 +15,9 @@ import java.util.List;
 @Getter
 @Setter
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "boardName"}))
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Board {
 
     @Id

@@ -1,5 +1,6 @@
 package com.example.domy.board;
 
+import com.example.domy.board.dto.BoardCreateRequest;
 import com.example.domy.board.dto.BoardDto;
 import com.example.domy.exception.EntityNotFoundException;
 import com.example.domy.tasklist.TaskList;
@@ -15,10 +16,10 @@ import java.util.List;
 @Service
 public class BoardService {
 
-    private BoardRepository boardRepository;
-    private BoardMapper boardMapper;
+    private final BoardRepository boardRepository;
+    private final BoardMapper boardMapper;
 
-    private UserService userService;
+    private final UserService userService;
 
     public BoardService(BoardRepository boardRepository, BoardMapper boardMapper, UserService userService) {
         this.boardRepository = boardRepository;
@@ -61,23 +62,19 @@ public class BoardService {
         return boardMapper.mapToListOfBoardDto(boardRepository.getBoardsByUser(user));
     }
 
-    public BoardDto createBoard(String title, User user) {
-        violateBoardTitle(title, user);
+    public BoardDto createBoard(BoardCreateRequest request, User user) {
+        if (boardRepository.existsByUserAndBoardName(user, request.getBoardName())) {
+            throw new IllegalArgumentException(String.format("Board with title '%s' already exists for username '%s'", request.getBoardName(), user.getUsername()));
+        }
 
-        Board board = new Board();
-        board.setBoardName(title);
-        board.setUser(user);
+        Board board = Board.builder()
+                .boardName(request.getBoardName())
+                .user(user)
+                .build();
 
         return boardMapper.mapToBoardDto(boardRepository.save(board));
     }
 
-    private void violateBoardTitle(String title, User user) {
-        if(title.isBlank()) {
-            throw new IllegalArgumentException("Title cannot be blank");
-        } else if (boardRepository.existsByUserAndBoardName(user, title)) {
-            throw new IllegalArgumentException(String.format("Board with title '%s' already exists for username '%s'", title, user.getUsername()));
-        }
-    }
 
     @Transactional
     public void deleteBoardById(Long boardId) {
