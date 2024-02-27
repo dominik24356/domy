@@ -2,13 +2,12 @@ package com.example.domy.board;
 
 import com.example.domy.board.dto.BoardCreateRequest;
 import com.example.domy.board.dto.BoardDto;
+import com.example.domy.board.dto.BoardUpdateRequest;
 import com.example.domy.exception.EntityNotFoundException;
-import com.example.domy.tasklist.TaskList;
 import com.example.domy.user.User;
 import com.example.domy.user.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -62,6 +61,7 @@ public class BoardService {
         return boardMapper.mapToListOfBoardDto(boardRepository.getBoardsByUser(user));
     }
 
+    @Transactional
     public BoardDto createBoard(BoardCreateRequest request, User user) {
         if (boardRepository.existsByUserAndBoardName(user, request.getBoardName())) {
             throw new IllegalArgumentException(String.format("Board with title '%s' already exists for username '%s'", request.getBoardName(), user.getUsername()));
@@ -85,4 +85,10 @@ public class BoardService {
         }
     }
 
+    @Transactional
+    public void updateBoard(Long boardId, BoardUpdateRequest boardUpdateRequest) {
+        Board boardToUpdate = getBoardById(boardId);
+        boardToUpdate.setBoardName(boardUpdateRequest.getBoardName().trim());
+        boardRepository.save(boardToUpdate);
+    }
 }

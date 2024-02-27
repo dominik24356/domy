@@ -45,6 +45,7 @@ public class TaskListService {
         }
     }
 
+    @Transactional
     public TaskListDto addTaskListToBoard(TaskListCreateRequest request, Long boardId) {
         Board board = boardService.getBoardById(boardId);
         TaskList taskList = TaskList.builder()
@@ -63,6 +64,7 @@ public class TaskListService {
         return taskListMapper.mapToTaskListDto(getTaskListById(id));
     }
 
+    @Transactional
     public TaskDto addTaskToList(String taskName, Long listId) {
         TaskList taskList = getTaskListById(listId);
         Task task = taskList.addTask(taskName.trim());

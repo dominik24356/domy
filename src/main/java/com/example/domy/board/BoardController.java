@@ -2,6 +2,7 @@ package com.example.domy.board;
 
 import com.example.domy.board.dto.BoardCreateRequest;
 import com.example.domy.board.dto.BoardDto;
+import com.example.domy.board.dto.BoardUpdateRequest;
 import com.example.domy.user.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -53,8 +54,16 @@ public class BoardController {
     }
 
     @DeleteMapping("/boards/{board-id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or @boardService.isBoardOwner(authentication, #boardId)")
     public ResponseEntity<Void> deleteBoardById(@PathVariable(name = "board-id") Long boardId) {
         boardService.deleteBoardById(boardId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/boards/{board-id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or @boardService.isBoardOwner(authentication, #boardId)")
+    public ResponseEntity<Void> updateBoard(@PathVariable(name = "board-id") Long boardId, @Valid @RequestBody BoardUpdateRequest boardUpdateRequest) {
+        boardService.updateBoard(boardId, boardUpdateRequest);
         return ResponseEntity.noContent().build();
     }
 
