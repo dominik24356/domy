@@ -54,7 +54,7 @@ public class Task {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "task_assignments",
+            name = "task_user_assignment",
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> assignedUsers;
@@ -67,8 +67,14 @@ public class Task {
     @JsonManagedReference
     private List<Attachment> attachments;
 
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference
+
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "task_label",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "label_id")
+    )
     private List<Label> labels;
 
     public Task() {

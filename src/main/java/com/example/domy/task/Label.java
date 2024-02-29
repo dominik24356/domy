@@ -1,16 +1,19 @@
 package com.example.domy.task;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Label {
 
     public enum LabelColor {
@@ -24,10 +27,8 @@ public class Label {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long labelId;
 
-    @ManyToOne
-    @JoinColumn(name = "task_id")
-    @JsonBackReference
-    private Task task;
+    @ManyToMany(mappedBy = "labels", fetch = FetchType.LAZY)
+    private List<Task> tasks;
 
     @Column(length = 100, nullable = false)
     @Size(min=1,max = 100)
@@ -38,6 +39,16 @@ public class Label {
     @NotNull
     @Column(nullable = false)
     private LabelColor color;
+
+
+    // equals by name and color
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Label)) return false;
+        Label label = (Label) o;
+        return name.equals(label.name) && color == label.color;
+    }
 
 
 }

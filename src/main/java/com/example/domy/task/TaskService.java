@@ -2,8 +2,11 @@ package com.example.domy.task;
 
 import com.example.domy.board.BoardService;
 import com.example.domy.exception.EntityNotFoundException;
+import com.example.domy.task.dto.LabelCreateRequest;
+import com.example.domy.task.dto.LabelDto;
 import com.example.domy.task.dto.TaskDto;
 import com.example.domy.task.dto.TaskUpdateRequest;
+import com.example.domy.task.mapper.LabelMapper;
 import com.example.domy.task.mapper.TaskMapper;
 import com.example.domy.tasklist.TaskListService;
 import com.example.domy.user.User;
@@ -18,19 +21,19 @@ import java.util.List;
 @Service
 public class TaskService {
 
-    private TaskRepository taskRepository;
-    private TaskMapper taskMapper;
-    private UserService userService;
+    private final TaskRepository taskRepository;
+    private final TaskMapper taskMapper;
+    private final UserService userService;
+    private final BoardService boardService;
+    private final LabelMapper labelMapper;
 
-    private TaskListService taskListService;
 
-    private BoardService boardService;
 
-    public TaskService(TaskRepository taskRepository, TaskMapper taskMapper, UserService userService, TaskListService taskListService, BoardService boardService) {
+    public TaskService(TaskRepository taskRepository, TaskMapper taskMapper, UserService userService, BoardService boardService, LabelMapper labelMapper) {
         this.taskRepository = taskRepository;
         this.taskMapper = taskMapper;
         this.userService = userService;
-        this.taskListService = taskListService;
+        this.labelMapper = labelMapper;
         this.boardService = boardService;
     }
 
@@ -66,5 +69,25 @@ public class TaskService {
 
     public boolean isTaskOwner(Authentication authentication, Long taskId) {
         return boardService.isBoardOwner(authentication, getTaskByIdInternal(taskId).getTaskList().getBoard());
+    }
+
+    @Transactional
+    public LabelDto addLabelToTask(Long taskId, LabelCreateRequest labelCreateRequest) {
+        Task task = getTaskByIdInternal(taskId);
+
+        Label label = Label.builder()
+                .name(labelCreateRequest.getName())
+                .color(labelCreateRequest.getColor())
+                .build();
+
+        // check if label already exists
+        if (task.getLabels().contains(label)){
+            throw new IllegalArgumentException(String.format("Label with name %s and color %s already exists in task with id %d", label.getName(), label.getColor(), taskId));
+        }
+
+        task.getLabels().add(label);
+        taskRepository.save(task);
+
+        return labelMapper.mapToLabelDto(label);
     }
 }

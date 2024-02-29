@@ -1,8 +1,6 @@
 package com.example.domy.task;
 
-import com.example.domy.task.dto.TaskCreateRequest;
-import com.example.domy.task.dto.TaskDto;
-import com.example.domy.task.dto.TaskUpdateRequest;
+import com.example.domy.task.dto.*;
 import com.example.domy.tasklist.TaskListService;
 import com.example.domy.tasklist.dto.TaskListDto;
 import org.springframework.http.HttpStatus;
@@ -53,6 +51,16 @@ public class TaskController {
         taskService.updateTask(taskId, updateRequest);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    // add label to task
+    @PostMapping("/tasks/{task-id}/labels")
+    @PreAuthorize("@taskService.isTaskOwner(authentication, #taskId) or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> addLabelToTask(@PathVariable(name = "task-id") Long taskId, @RequestBody LabelCreateRequest labelCreateRequest) {
+        LabelDto labelDto = taskService.addLabelToTask(taskId, labelCreateRequest);
+        return ResponseEntity.created(URI.create("/api/labels/" + labelDto.getLabelId())).build();
+    }
+
+    // add method to get label by id
 
 
 }
