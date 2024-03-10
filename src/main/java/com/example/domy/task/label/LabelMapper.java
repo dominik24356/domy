@@ -1,7 +1,7 @@
-package com.example.domy.task.mapper;
+package com.example.domy.task.label;
 
-import com.example.domy.task.Label;
-import com.example.domy.task.dto.LabelDto;
+import com.example.domy.task.label.dto.LabelDto;
+import com.example.domy.task.mapper.CommentMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

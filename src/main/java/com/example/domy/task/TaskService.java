@@ -2,18 +2,14 @@ package com.example.domy.task;
 
 import com.example.domy.board.BoardService;
 import com.example.domy.exception.EntityNotFoundException;
-import com.example.domy.task.dto.LabelCreateRequest;
-import com.example.domy.task.dto.LabelDto;
 import com.example.domy.task.dto.TaskDto;
 import com.example.domy.task.dto.TaskUpdateRequest;
-import com.example.domy.task.mapper.LabelMapper;
+import com.example.domy.task.label.LabelMapper;
 import com.example.domy.task.mapper.TaskMapper;
-import com.example.domy.tasklist.TaskListService;
 import com.example.domy.user.User;
 import com.example.domy.user.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -71,23 +67,5 @@ public class TaskService {
         return boardService.isBoardOwner(authentication, getTaskByIdInternal(taskId).getTaskList().getBoard());
     }
 
-    @Transactional
-    public LabelDto addLabelToTask(Long taskId, LabelCreateRequest labelCreateRequest) {
-        Task task = getTaskByIdInternal(taskId);
 
-        Label label = Label.builder()
-                .name(labelCreateRequest.getName())
-                .color(labelCreateRequest.getColor())
-                .build();
-
-        // check if label already exists
-        if (task.getLabels().contains(label)){
-            throw new IllegalArgumentException(String.format("Label with name %s and color %s already exists in task with id %d", label.getName(), label.getColor(), taskId));
-        }
-
-        task.getLabels().add(label);
-        taskRepository.save(task);
-
-        return labelMapper.mapToLabelDto(label);
-    }
 }

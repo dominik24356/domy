@@ -1,5 +1,6 @@
-package com.example.domy.task;
+package com.example.domy.task.label;
 
+import com.example.domy.board.Board;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,6 +15,9 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"name", "color", "board_id"})
+})
 public class Label {
 
     public enum LabelColor {
@@ -27,8 +31,9 @@ public class Label {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long labelId;
 
-    @ManyToMany(mappedBy = "labels", fetch = FetchType.LAZY)
-    private List<Task> tasks;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
+    private Board board;
 
     @Column(length = 100, nullable = false)
     @Size(min=1,max = 100)
@@ -39,16 +44,6 @@ public class Label {
     @NotNull
     @Column(nullable = false)
     private LabelColor color;
-
-
-    // equals by name and color
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Label)) return false;
-        Label label = (Label) o;
-        return name.equals(label.name) && color == label.color;
-    }
 
 
 }

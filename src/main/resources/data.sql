@@ -40,11 +40,11 @@ INSERT INTO attachment (attachment_id, link, name, created_at, task_id)
 VALUES (2, 'https://www.google.com/search?q=java&sca_esv=597084762&hl=pl&source=hp&ei=d_adZZCOK-eRxc8Pmb6QoAE&iflsig=ANes7DEAAAAAZZ4Eh7N2bSFgoZuEdyL7fMjg7UWGDKm2&udm=&ved=0ahUKEwjQpbCQ2dGDAxXnSPEDHRkfBBQQ4dUDCAo&uact=5&oq=java&gs_lp=Egdnd3Mtd2l6IgRqYXZhMgsQABiABBixAxiDATILEAAYgAQYsQMYgwEyCBAAGIAEGLEDMggQLhiABBixAzIIEC4YgAQYsQMyDhAuGIAEGMcBGK8BGJgFMgsQABiABBixAxiDATIIEAAYgAQYsQMyCxAAGIAEGLEDGIMBMgsQABiABBixAxiDAUjEJlCeBFjdJXAEeACQAQCYAakBoAGQBqoBAzAuNrgBA8gBAPgBAagCCsICChAAGAMYjwEY6gLCAgoQLhgDGI8BGOoCwgIREC4YgAQYsQMYgwEYxwEY0QPCAgUQABiABMICDhAuGIAEGMcBGK8BGI4FwgILEC4YgAQYsQMYgwHCAg4QLhiABBiKBRixAxiDAcICBRAuGIAEwgIOEC4YgAQYsQMYxwEY0QPCAg4QABiABBiKBRixAxiDAQ&sclient=gws-wiz', 'File 2', CURRENT_TIMESTAMP, 1);
 
 -- inserting label to task
-INSERT INTO label (label_id, name, color)
-VALUES (1, 'Label 1', 'RED');
+INSERT INTO label (label_id, name, color, board_id)
+VALUES (1, 'Label 1', 'RED', 1);
 
-INSERT INTO label (label_id, name, color)
-VALUES (2, 'Label 2', 'GREEN');
+INSERT INTO label (label_id, name, color, board_id)
+VALUES (2, 'Label 2', 'GREEN', 1);
 
 -- inserting task_label to task
 INSERT INTO task_label (task_id, label_id)

@@ -1,6 +1,6 @@
-package com.example.domy.task.dto;
+package com.example.domy.task.label.dto;
 
-import com.example.domy.task.Label;
+import com.example.domy.task.label.Label;
 import lombok.Getter;
 import lombok.Setter;
 

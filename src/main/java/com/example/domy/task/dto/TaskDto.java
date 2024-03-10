@@ -2,10 +2,10 @@ package com.example.domy.task.dto;
 
 
 import com.example.domy.task.Task;
+import com.example.domy.task.label.dto.LabelDto;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.List;
 

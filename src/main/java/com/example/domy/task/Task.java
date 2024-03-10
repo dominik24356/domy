@@ -1,5 +1,6 @@
 package com.example.domy.task;
 
+import com.example.domy.task.label.Label;
 import com.example.domy.tasklist.TaskList;
 import com.example.domy.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -14,7 +15,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -75,7 +78,7 @@ public class Task {
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "label_id")
     )
-    private List<Label> labels;
+    private Set<Label> labels = new HashSet<>();
 
     public Task() {
 
