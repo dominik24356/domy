@@ -1,6 +1,5 @@
 package com.example.domy.task.label;
 
-import com.example.domy.board.BoardService;
 import com.example.domy.task.label.dto.LabelCreateRequest;
 import com.example.domy.task.label.dto.LabelDto;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api")
@@ -17,12 +17,8 @@ public class LabelController {
 
     private final LabelService labelService;
 
-    private final BoardService boardService;
-
-
-    public LabelController(LabelService labelService, BoardService boardService) {
+    public LabelController(LabelService labelService) {
         this.labelService = labelService;
-        this.boardService = boardService;
     }
 
 
@@ -40,6 +36,12 @@ public class LabelController {
         return ResponseEntity.ok(labelService.getLabelById(labelId));
     }
 
+
+    @GetMapping("/boards/{boardId}/labels")
+    @PreAuthorize("@boardService.isBoardOwner(authentication, #boardId) OR hasRole('ROLE_ADMIN')")
+    public ResponseEntity<List<LabelDto>> getLabelsByBoardId(@PathVariable Long boardId) {
+        return ResponseEntity.ok(labelService.getLabelsByBoardId(boardId));
+    }
 
 
 }
