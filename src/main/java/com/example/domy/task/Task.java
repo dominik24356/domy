@@ -83,4 +83,12 @@ public class Task {
     public Task() {
 
     }
+
+    public void addLabel(Label label) {
+        labels.add(label);
+    }
+
+    public void removeLabel(Label label) {
+        labels.remove(label);
+    }
 }

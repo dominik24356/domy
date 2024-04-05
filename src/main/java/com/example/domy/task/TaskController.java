@@ -52,15 +52,21 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    // add label to task
-//    @PostMapping("/tasks/{task-id}/labels")
-//    @PreAuthorize("@taskService.isTaskOwner(authentication, #taskId) or hasRole('ROLE_ADMIN')")
-//    public ResponseEntity<Void> addLabelToTask(@PathVariable(name = "task-id") Long taskId, @RequestBody LabelCreateRequest labelCreateRequest) {
-//        LabelDto labelDto = taskService.addLabelToTask(taskId, labelCreateRequest);
-//        return ResponseEntity.created(URI.create("/api/labels/" + labelDto.getLabelId())).build();
-//    }
+    @PostMapping("/tasks/{task-id}/labels/{label-id}")
+    @PreAuthorize("(@taskService.isTaskOwner(authentication, #taskId) and @labelService.isLabelOwner(authentication, #labelId))" +
+            " or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> assignLabelToTask(@PathVariable(name = "task-id") Long taskId, @PathVariable(name = "label-id") Long labelId) {
+        taskService.assignLabelToTask(taskId, labelId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 
-    // add method to get label by id
+    @DeleteMapping("/tasks/{task-id}/labels/{label-id}")
+    @PreAuthorize("(@taskService.isTaskOwner(authentication, #taskId) and @labelService.isLabelOwner(authentication, #labelId))" +
+            " or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> unassignLabelFromTask(@PathVariable(name = "task-id") Long taskId, @PathVariable(name = "label-id") Long labelId) {
+        taskService.unassignLabelFromTask(taskId, labelId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 
 
 }
