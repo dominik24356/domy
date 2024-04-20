@@ -1,13 +1,16 @@
 package com.example.domy.task.label;
 
 import com.example.domy.board.Board;
+import com.example.domy.task.Task;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -44,6 +47,16 @@ public class Label {
     @NotNull
     @Column(nullable = false)
     private LabelColor color;
+
+    @ManyToMany(mappedBy = "labels")
+    private Set<Task> tasks = new HashSet<>();
+
+    public void detachLabelFromTasks() {
+        for (Task task : tasks) {
+            task.getLabels().remove(this);
+        }
+        tasks.clear();
+    }
 
 
 }

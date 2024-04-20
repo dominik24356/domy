@@ -44,4 +44,12 @@ public class LabelController {
     }
 
 
+    @DeleteMapping("/labels/{labelId}")
+    @PreAuthorize("@labelService.isLabelOwner(authentication, #labelId) OR hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> deleteLabel(@PathVariable Long labelId) {
+        labelService.deleteLabel(labelId);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

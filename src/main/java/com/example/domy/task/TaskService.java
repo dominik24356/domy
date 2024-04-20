@@ -93,7 +93,7 @@ public class TaskService {
             throw new IllegalArgumentException("cannot assign label from different board");
         }
 
-        task.removeLabel(label);
+        task.detachLabelFromTask(label);
         taskRepository.save(task);
     }
 }

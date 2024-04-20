@@ -77,4 +77,14 @@ public class LabelService {
                 .collect(Collectors.toList());
 
     }
+
+    @Transactional
+    public void deleteLabel(Long labelId) {
+        try {
+            getLabelByIdInternal(labelId).detachLabelFromTasks();
+            labelRepository.deleteById(labelId);
+        } catch (Exception e) {
+            throw new EntityNotFoundException(Label.class, "id", labelId.toString());
+        }
+    }
 }

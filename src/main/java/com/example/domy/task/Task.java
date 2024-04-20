@@ -72,7 +72,7 @@ public class Task {
 
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "task_label",
             joinColumns = @JoinColumn(name = "task_id"),
@@ -88,7 +88,8 @@ public class Task {
         labels.add(label);
     }
 
-    public void removeLabel(Label label) {
+    public void detachLabelFromTask(Label label) {
         labels.remove(label);
     }
+
 }
